@@ -5,6 +5,7 @@ headings = [90, 0, 270, 180]
 size = 210
 screen = turtle.Screen()
 screen.setworldcoordinates(-size, -size, size, size)
+screen.tracer(0)
 
 def draw_screen():
     a = turtle.Turtle()
@@ -91,6 +92,8 @@ def move(r, user_input):
         r.pos[r.direction%2] += n
         robo.pu()
         robo.seth(headings[r.direction])
+        screen.tracer(1)
+        robo.speed(1)
         robo.goto(r.pos[1], r.pos[0])
         return f' > {r.name} moved {d} by {args[1]} steps.', True
     else:
@@ -158,6 +161,7 @@ def replay(r, user_input):
     return '', True
 
 def set_up():
+    screen.tracer(0)
     draw_screen()
     obs = maze.get_obstacles()
     for o in obs:

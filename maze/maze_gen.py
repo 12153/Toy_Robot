@@ -134,6 +134,9 @@ class maze:
             if (-5 <= obs[1] <= 5) and (-5 <= obs[0] <= 5):
                 win_blocks += [obs]
         obs_list = list(filter(lambda x: x not in win_blocks, obstacle_list))
+        for obs in obs_list:
+            if obs[1] == -196:
+                obs_list += [[obs[0], -200]]
         return obs_list
 
 m = maze(20, 10)

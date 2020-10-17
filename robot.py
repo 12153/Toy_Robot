@@ -17,7 +17,7 @@ def get_name():
 def handle_command(r):
     commands = {'off':world.off, 'help':world.help_f, 'forward': world.move, 
     'left':world.turn, 'right':world.turn, 'back':world.move,
-    'sprint':world.sprint, 'replay':world.replay}
+    'sprint':world.sprint, 'replay':world.replay, "mazerun":maze.run}
     actions=["left","right","forward","back"]
     user_input = cmd = input(f"{r.name}: What must I do next? ")
     cmd = cmd.strip().lower().split()
@@ -34,14 +34,14 @@ def handle_command(r):
     return do_next
 
 def robot_start():
-    name = get_name()
+    # name = get_name()
+    name = "cool dude"
     r = Robot(name)
     print(f'{name}: Hello kiddo!')
 
     maze.make_obstacles(r)
     maze.print_obstacles()
     world.set_up()
-    maze.run()
     do_next = True
     while do_next:
         do_next = handle_command(r)
