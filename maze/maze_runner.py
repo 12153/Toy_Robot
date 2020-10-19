@@ -5,7 +5,7 @@ import world
 a = turtle.Turtle()
 screen = turtle.Screen()
 s = 210
-zz = 10
+zz = 5
 screen.setworldcoordinates(-s,-s,s,s)
 # screen.tracer(0)
 screen.delay(0)
@@ -26,7 +26,7 @@ class Node:
         a.pd()
         a.begin_fill()
         for _ in range(4):
-            a.fd(2)
+            a.fd(5)
             a.lt(90)
         a.end_fill()
 
@@ -41,7 +41,7 @@ def do_things():
             if maze.is_position_blocked(j, i):
                 l.append(Node(j, i, False))
             else:
-                l.append(Node(j,i,True))
+                l.append(Node(j, i,True))
             # l.append(Node(j, i, True))
         coords.append(l)
 
@@ -59,15 +59,16 @@ def do_things():
 def get_n(node):
     for i, line in enumerate(coords):
         for j, n in enumerate(line):
-            if n == node:
+            if n.x == node.x and n.y == node.y:
                 x, y = j, i
                 break
+
     up, right,down,left = [None]*4
-    if x > 1:
+    if x > 0 and node.x > coords[y][x-1].x:
         left = coords[y][x-1]
     if x < len(coords[0]) - 1:
         right = coords[y][x+1]
-    if y > 1:
+    if y > 0 and node.y > coords[y-1][x].y:
         down = coords[y-1][x]
     if y < len(coords) - 1:
         up = coords[y+1][x]
@@ -83,6 +84,9 @@ def add_to(tup, q):
 def run(r, user_input):
     do_things()
     global coords
+
+    print(f'{r.name}: starting mazerun..')
+
     while r.pos[1]%zz != 0:
         while r.direction != 3:
             world.turn(r, "left")
@@ -97,7 +101,6 @@ def run(r, user_input):
                 start = n
                 break
     # start = coords[0][0]
-
     args = user_input.lower().split()
 
     if "bottom" in args:
@@ -140,14 +143,14 @@ def run(r, user_input):
         for i in n:
             i.visited = False
 
-    a = turtle.Turtle()
-    a.pu()
-    a.goto(start.x, start.y)
-    a.pd()
-    for n in path:
-        # a.goto(n.x, n.y)
-        n.color = "yellow"
-        n.draw()
+    # a = turtle.Turtle()
+    # a.pu()
+    # a.goto(start.x, start.y)
+    # a.pd()
+    # for n in path:
+    #     print(n.x, n.y)
+    #     n.color = "yellow"
+        # n.draw()
 
     for n in path:
         if n.x > r.pos[1]:

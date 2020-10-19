@@ -93,7 +93,7 @@ def move(r, user_input):
         robo.pu()
         robo.seth(headings[r.direction])
         screen.tracer(1)
-        robo.speed(1)
+        robo.speed(0)
         robo.goto(r.pos[1], r.pos[0])
         return f' > {r.name} moved {d} by {args[1]} steps.', True
     else:
@@ -162,6 +162,7 @@ def replay(r, user_input):
 
 def set_up():
     screen.tracer(0)
+    screen.delay(0)
     draw_screen()
     obs = maze.get_obstacles()
     for o in obs:

@@ -8,6 +8,16 @@ class Robot:
         self.direction = 0
         self.history = []
 
+def is_win(r):
+    if r.pos[0] == 200:
+        print('I am at the top edge')
+    if r.pos[0] == -200:
+        print('I am at the bottom edge')
+    if r.pos[1] == 100:
+        print('I am at the right edge')
+    if r.pos[1] == -100:
+        print('I am at the left edge')
+
 def get_name():
     name = ''
     while name == '':
@@ -31,6 +41,7 @@ def handle_command(r):
         print(out)
     if cmd[0] in actions or cmd[0] == 'replay':
         print(world.show_position(r))
+    is_win(r)    
     return do_next
 
 def robot_start():
